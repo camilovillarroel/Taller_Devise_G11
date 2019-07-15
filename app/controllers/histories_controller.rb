@@ -1,5 +1,6 @@
 class HistoriesController < ApplicationController
   before_action :set_history, only: [:show, :edit, :update, :destroy]
+  
 
   # GET /histories
   # GET /histories.json
@@ -23,9 +24,9 @@ class HistoriesController < ApplicationController
 
   # POST /histories
   # POST /histories.json
-  def create
+  def create 
     @history = History.new(history_params)
-
+    @history.user = current_user
     respond_to do |format|
       if @history.save
         format.html { redirect_to @history, notice: 'History was successfully created.' }
@@ -71,4 +72,6 @@ class HistoriesController < ApplicationController
     def history_params
       params.require(:history).permit(:title, :picture, :content, :remote_picture_url)
     end
+
+   
 end
